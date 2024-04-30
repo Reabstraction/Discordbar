@@ -126,10 +126,14 @@ html.platform-win {
 
     & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
         & .container__26baa {
-            /* right: calc(var(--window-button-width, 46px) * 3) !important; */
-            width: calc(100% - var(--window-button-width, 46px) * 3);
+            /* width: calc(100% - var(--window-button-width, 46px)); */
             background: var(--background-tertiary);
             -webkit-app-region: drag;
+            
+            body:has(.callContainer__1477d) & {
+                right: calc(var(--window-button-width, 46px) * 3) !important;
+                /* background: var(--background-primary); */
+            }
         }
 
         & .subtitleContainer_f50402 {
