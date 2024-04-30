@@ -134,7 +134,7 @@ html.platform-win {
         border-top-left-radius: 0px;
     }
 
-    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)):not(:has(.callContainer__1477d)) {
+    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
         & .header__77c95,
         & .searchBar__621ec {
             box-shadow: none;
@@ -143,11 +143,61 @@ html.platform-win {
         & .container__26baa {
             /* width: calc(100% - var(--window-button-width, 46px)); */
             background: var(--background-tertiary);
-            -webkit-app-region: drag;
+            body:not(:has(.callContainer__1477d)) {
+                -webkit-app-region: drag;
+            }
             
-            body:has(.callContainer__1477d) & {
+            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)) & {
                 right: calc(var(--window-button-width, 46px) * 3) !important;
-                /* background: var(--background-primary); */
+            }
+        }
+        
+        &:has(.videoGrid__6c223) {
+            & .winButton_f17fb6 {
+                background: var(--background-tertiary);
+            }
+
+            & .callContainer__1477d {
+                overflow: hidden;
+                &>.root__3eef0 {
+                    top: -48px;
+                    background: transparent;
+                }
+            }
+            & .callContainer__1477d::before {
+                background: var(--background-tertiary);
+                content: "";
+                top: 0;
+                width: 100%;
+                position: relative;
+                z-index: 0;
+                display: block;
+                left: 0px;
+                height: 48px;
+            }
+
+            & .topControls_e834ab {
+                box-sizing: border-box;
+                /* right: calc(var(--window-button-width, 46px) * 3) solid var(--background-tertiary); */
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                background: var(--background-tertiary);
+                width: calc(100% - var(--window-button-width, 46px) * 3 + 40px);
+                display: block;
+                transform: none !important;
+                opacity: 1 !important;
+                pointer-events: all;
+            }
+
+            & .bottomControls__72d8d {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            & .gradientTop_e30d42,
+            & .gradientBottom__2e72c {
+                display: none;
             }
         }
 
