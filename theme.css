@@ -17,6 +17,9 @@ html.platform-win {
      */
     --window-button-full-height: 48px;
 
+
+    --elevation-low: 0;
+
     & {
         --scrollbar-thin-thumb: var(--background-primary) !important;
     }
@@ -231,9 +234,22 @@ html.platform-win {
                 -webkit-app-region: no-drag;
             }
         }
+        
+        & .homeWrapperNormal__34a23 > .headerBar__3337a {
+            -webkit-app-region: drag;
+            width: calc(100% - var(--window-button-width) * 3);
+            &::after {
+                width: calc(var(--window-button-width) * 3);
+                content: "";
+                height: 100%;
+                position: fixed;
+                right: calc(var(--window-button-width) * -3);
+                background: var(--background-tertiary);
+            }
+        }
 
         & .children_cde9af {
-            border-right: 1px solid var(--background-primary);
+            /* border-right: 1px solid var(--background-primary); */
 
             &::after {
                 display: none;
