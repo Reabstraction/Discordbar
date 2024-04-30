@@ -5,11 +5,6 @@
  * @description (WINDOWS-ONLY) Fixes some issues I have with the Discord UI
  */
 
-@font-face {
-    font-family: "Segoe Fluent Icons";
-    src: local("Segoe Fluent Icons Regular");
-}
-
 html.platform-win {
     /*
      Matches Windows 10/11
@@ -42,9 +37,17 @@ html.platform-win {
         transition: background .1s ease-in-out, color .05s ease-in-out;
     }
 
-    &.app-focused .titleBar__710b0>*,
+    /* &.app-focused .titleBar__710b0>*, */
     & .winButton_f17fb6:hover {
         color: var(--interactive-active);
+        &:hover {
+            background: var(--background-modifier-selected);
+            color: var(--interactive-hover);
+        }
+        &:active {
+            background: var(--background-modifier-normal);
+            color: var(--interactive-hover);
+        }
     }
 
     & .winButtonMinMax_caf9c8[aria-label="Minimize"] {
@@ -58,6 +61,12 @@ html.platform-win {
 
     & .winButtonClose__6396d {
         order: 3;
+        &:hover {
+            background: var(--red-460) !important;
+        }
+        &:active {
+            background: var(--red-400) !important;
+        }
     }
 
     & .wordmarkWindows_ffbc5e {
