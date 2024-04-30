@@ -24,10 +24,6 @@ html.platform-win {
         --scrollbar-thin-thumb: var(--background-primary) !important;
     }
 
-    & .container_d1f8f5 {
-        /* -webkit-app-region: drag; */
-    }
-
     & .titleBar__710b0 {
         margin-top: 0px;
         margin-bottom: 0px;
