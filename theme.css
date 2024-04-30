@@ -153,10 +153,6 @@ html.platform-win {
         }
         
         &:has(.videoGrid__6c223) {
-            & .winButton_f17fb6 {
-                background: var(--background-tertiary);
-            }
-
             & .callContainer__1477d {
                 overflow: hidden;
                 &>.root__3eef0 {
@@ -183,21 +179,28 @@ html.platform-win {
                 padding: 0;
                 width: 100%;
                 background: var(--background-tertiary);
-                width: calc(100% - var(--window-button-width, 46px) * 3 + 40px);
+                width: calc(100% - var(--window-button-width, 46px) * 3 + 20px);
                 display: block;
-                transform: none !important;
-                opacity: 1 !important;
+                transform: none;
+                opacity: 1;
                 pointer-events: all;
             }
 
             & .bottomControls__72d8d {
-                opacity: 1 !important;
-                transform: none !important;
+                opacity: 1;
+                transform: none;
             }
 
             & .gradientTop_e30d42,
             & .gradientBottom__2e72c {
                 display: none;
+            }
+
+            & [aria-label="Show Chat"] {
+                opacity: 1;
+                transform: none;
+                z-index: 1;
+                right: calc(var(--window-button-width, 46px) * 3 + 12px);
             }
         }
 
