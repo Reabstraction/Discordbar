@@ -35,18 +35,15 @@ html.platform-win {
         height: 100%;
         width: 46px;
         transition: background .1s ease-in-out, color .05s ease-in-out;
+        color: var(--interactive-normal);
     }
 
     /* &.app-focused .titleBar__710b0>*, */
     & .winButton_f17fb6:hover {
         color: var(--interactive-active);
-        &:hover {
-            background: var(--background-modifier-selected);
-            color: var(--interactive-hover);
-        }
+        background: var(--background-modifier-selected);
         &:active {
             background: var(--background-modifier-normal);
-            color: var(--interactive-hover);
         }
     }
 
@@ -74,6 +71,7 @@ html.platform-win {
         order: 0;
         margin-right: auto;
         transition: color .05s ease-in-out;
+        color: var(--interactive-normal);
     }
 
     & .standardSidebarView__12528 {
