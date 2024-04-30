@@ -39,11 +39,13 @@ html.platform-win {
     }
 
     /* &.app-focused .titleBar__710b0>*, */
-    & .winButton_f17fb6:hover {
-        color: var(--interactive-active);
-        background: var(--background-modifier-selected);
+    & .winButton_f17fb6 {
+        &:hover, &:active {
+            color: var(--interactive-active);
+            background: var(--background-modifier-hover);
+        }
         &:active {
-            background: var(--background-modifier-normal);
+            background: var(--background-modifier-selected);
         }
     }
 
