@@ -134,6 +134,11 @@ html.platform-win {
     }
 
     & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
+        & .header__77c95,
+        & .searchBar__621ec {
+            box-shadow: none;
+        }
+
         & .container__26baa {
             /* width: calc(100% - var(--window-button-width, 46px)); */
             background: var(--background-tertiary);
