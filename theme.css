@@ -272,6 +272,10 @@ html.platform-win {
             height: 0px;
         }
 
+        & .upperContainer__57565 {
+            margin-right: calc(var(--window-button-width) * 3);
+        }
+
         & .base_c0676e {
             border-top-left-radius: 0 !important;
         }
