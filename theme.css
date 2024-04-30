@@ -329,6 +329,10 @@ html.platform-win {
                 &>.title_d4ba1a {
                     background: transparent;
 
+                    & .upperContainer__57565 {
+                        margin-right: 0;
+                    }
+
                     & .search__07df0 {
                         &>.search_ac353c {
                             &>.searchBar__5a20a {
