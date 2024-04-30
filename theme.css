@@ -27,12 +27,13 @@ html.platform-win {
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: 31px;
+        --height: 31px;
+        height: var(--height);
     }
 
     & .winButton_f17fb6 {
         top: 0px;
-        height: 100%;
+        height: var(--height);
         width: 46px;
         transition: background .1s ease-in-out, color .05s ease-in-out;
         color: var(--interactive-normal);
@@ -133,7 +134,7 @@ html.platform-win {
         border-top-left-radius: 0px;
     }
 
-    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
+    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)):not(:has(.callContainer__1477d)) {
         & .header__77c95,
         & .searchBar__621ec {
             box-shadow: none;
