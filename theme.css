@@ -1,0 +1,273 @@
+/**
+ * @name Fix Discord's Theme
+ * @author Reabstraction
+ * @version 1.0.0
+ * @description (WINDOWS-ONLY) Fixes some issues I have with the Discord UI
+ */
+
+@font-face {
+    font-family: "Segoe Fluent Icons";
+    src: local("Segoe Fluent Icons Regular");
+}
+
+html.platform-win {
+    /*
+     Matches Windows 10/11
+     Default: 46px
+     */
+    --window-button-width: 46px;
+    /*
+     Matches Windows 10/11
+     Default: 48px
+     */
+    --window-button-full-height: 48px;
+
+    & {
+        --scrollbar-thin-thumb: var(--background-primary) !important;
+    }
+
+    & .titleBar__710b0 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 31px;
+    }
+
+    & .winButton_f17fb6 {
+        top: 0px;
+        height: 100%;
+        width: 46px;
+        transition: background .1s ease-in-out, color .05s ease-in-out;
+    }
+
+    &.app-focused .titleBar__710b0>*,
+    & .winButton_f17fb6:hover {
+        color: var(--interactive-active);
+    }
+
+    & .winButtonMinMax_caf9c8[aria-label="Minimize"] {
+        margin-left: auto;
+        order: 1;
+    }
+
+    & .winButtonMinMax_caf9c8[aria-label="Maximize"] {
+        order: 2;
+    }
+
+    & .winButtonClose__6396d {
+        order: 3;
+    }
+
+    & .wordmarkWindows_ffbc5e {
+        position: inherit;
+        order: 0;
+        margin-right: auto;
+        transition: color .05s ease-in-out;
+    }
+
+    & .standardSidebarView__12528 {
+        background: var(--bg-overlay-app-frame, var(--background-tertiary));
+    }
+
+    & .sidebarRegion__36437 {
+        max-width: 250px;
+    }
+
+    & .sidebarRegionScroller__8113e {
+        background: transparent;
+        width: 100%;
+        /* min-width: 240px; */
+        padding: 0 !important;
+        scrollbar-width: thin;
+    }
+
+    & .sidebar__02e8d {
+        padding: 12px;
+        padding-left: 20px;
+        /* account for thin scrollbar */
+        width: 100%;
+    }
+
+    & .contentRegion__08eba {
+        border-top-left-radius: 8px;
+        overflow: hidden;
+
+        flex: 1 1 100000px;
+    }
+
+    & .base_c0676e {
+        border-top-left-radius: 8px !important;
+    }
+
+    & .contentRegionScroller__9ae20 {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        & .toolsContainer__4e6ad {
+            position: absolute;
+            right: 0;
+            top: 12px;
+            left: auto;
+            padding: 0;
+            margin: 0;
+
+            & .keybind_a619c1 {
+                display: none;
+            }
+        }
+    }
+
+    & .notice_a687ab {
+        border-top-left-radius: 0px;
+    }
+
+    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
+        & .container__26baa {
+            /* right: calc(var(--window-button-width, 46px) * 3) !important; */
+            width: calc(100% - var(--window-button-width, 46px) * 3);
+            background: var(--background-tertiary);
+            -webkit-app-region: drag;
+        }
+
+        & .subtitleContainer_f50402 {
+            background: var(--background-tertiary);
+        }
+
+        & .searchBar__621ec {
+            background: var(--background-tertiary);
+            -webkit-app-region: drag;
+
+            & .searchBarComponent__8f95f {
+                background: var(--background-primary);
+                -webkit-app-region: no-drag;
+            }
+        }
+
+        & .children_cde9af {
+            border-right: 1px solid var(--background-primary);
+
+            &::after {
+                display: none;
+            }
+        }
+
+        & .privateChannels__9b518 {
+            background: var(--background-tertiary);
+
+            & .scroller__89969 {
+                border-top-left-radius: 8px;
+            }
+        }
+
+        & .sidebar_e031be {
+            border-radius: 0 !important;
+        }
+
+        & .typeWindows_e41dab {
+            height: 0px;
+        }
+
+        & .base_c0676e {
+            border-top-left-radius: 0 !important;
+        }
+
+        & .notice__5fd4c {
+            margin-right: calc(var(--window-button-width) * 3);
+        }
+
+        & .winButton_f17fb6 {
+            /* display: fixed; */
+            --height: var(--window-button-full-height, 48px);
+            top: calc(var(--height) / 2);
+            right: 0px;
+            height: var(--height);
+            width: var(--window-button-width, 46px);
+            /* background: var(--background-secondary); */
+            z-index: 9999;
+            -webkit-app-region: no-drag;
+
+            &::before {
+                content: "";
+                top: var(--height);
+                height: calc(48px - var(--height));
+                /* CHANGE: IF THINGS BREAK */
+                position: fixed;
+                width: var(--window-button-width, 46px);
+                -webkit-app-region: drag;
+            }
+
+            body:has(.notice_a687ab) & {
+                --height: 40px;
+            }
+
+            /**/
+        }
+
+        & .wordmarkWindows_ffbc5e {
+            position: fixed;
+            top: 2px;
+            left: 0px;
+            padding: 0;
+            margin: 4px 8px;
+            -webkit-app-region: drag;
+        }
+
+        & .chat__52833 {
+            background: var(--background-tertiary);
+
+            &>.subtitleContainer_f50402 {
+                margin-right: calc(var(--window-button-width, 46px) * 3);
+                -webkit-app-region: drag;
+
+                body:has(.container__694a1) & {
+                    margin-right: 0;
+                }
+
+                &>.title_d4ba1a {
+                    background: transparent;
+
+                    & .search__07df0 {
+                        &>.search_ac353c {
+                            &>.searchBar__5a20a {
+                                background-color: var(--background-primary) !important;
+                            }
+                        }
+                    }
+                }
+
+                & .iconWrapper_de6cd1 *,
+                & .iconWrapper_de6cd1 {
+                    -webkit-app-region: no-drag;
+                }
+            }
+
+            z-index: 0;
+
+            &>.content__01e65 {
+                border-top: 1px solid var(--background-primary);
+                -webkit-app-region: no-drag;
+
+                &::before {
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        & .tree__7a511 {
+            margin-top: 28px;
+            height: calc(100% - 28px);
+        }
+
+        & .container__694a1 {
+            & .container__26baa {
+                /* right: calc(46px * 3); */
+                width: calc(100% - (46px * 3));
+            }
+
+            /* margin-top: 48px; */
+        }
+    }
+}
