@@ -21,6 +21,14 @@ html.platform-win {
         --scrollbar-thin-thumb: var(--background-primary) !important;
     }
 
+    & .container_d1f8f5 {
+        -webkit-app-region: drag;
+
+        & * {
+            -webkit-app-region: no-drag;
+        }
+    }
+
     & .titleBar__710b0 {
         margin-top: 0px;
         margin-bottom: 0px;
@@ -41,10 +49,13 @@ html.platform-win {
 
     /* &.app-focused .titleBar__710b0>*, */
     & .winButton_f17fb6 {
-        &:hover, &:active {
+
+        &:hover,
+        &:active {
             color: var(--interactive-active);
             background: var(--background-modifier-hover);
         }
+
         &:active {
             background: var(--background-modifier-selected);
         }
@@ -61,9 +72,11 @@ html.platform-win {
 
     & .winButtonClose__6396d {
         order: 3;
+
         &:hover {
             background: var(--red-460) !important;
         }
+
         &:active {
             background: var(--red-400) !important;
         }
@@ -75,6 +88,13 @@ html.platform-win {
         margin-right: auto;
         transition: color .05s ease-in-out;
         color: var(--interactive-normal);
+        -webkit-app-region: drag;
+
+        /* z-index: 100000; */
+        pointer-events & * {
+            -webkit-app-region: drag;
+            pointer-events: none;
+        }
     }
 
     & .standardSidebarView__12528 {
@@ -135,6 +155,7 @@ html.platform-win {
     }
 
     & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
+
         & .header__77c95,
         & .searchBar__621ec {
             box-shadow: none;
@@ -143,23 +164,26 @@ html.platform-win {
         & .container__26baa {
             /* width: calc(100% - var(--window-button-width, 46px)); */
             background: var(--background-tertiary);
+
             body:not(:has(.callContainer__1477d)) {
                 -webkit-app-region: drag;
             }
-            
+
             body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)) & {
                 right: calc(var(--window-button-width, 46px) * 3) !important;
             }
         }
-        
+
         &:has(.videoGrid__6c223) {
             & .callContainer__1477d {
                 overflow: hidden;
+
                 &>.root__3eef0 {
                     top: -48px;
                     background: transparent;
                 }
             }
+
             & .callContainer__1477d::before {
                 background: var(--background-tertiary);
                 content: "";
@@ -264,8 +288,8 @@ html.platform-win {
             &::before {
                 content: "";
                 top: var(--height);
-                height: calc(48px - var(--height));
                 /* CHANGE: IF THINGS BREAK */
+                height: calc(48px - var(--height));
                 position: fixed;
                 width: var(--window-button-width, 46px);
                 -webkit-app-region: drag;
@@ -274,17 +298,11 @@ html.platform-win {
             body:has(.notice_a687ab) & {
                 --height: 40px;
             }
-
-            /**/
         }
 
         & .wordmarkWindows_ffbc5e {
-            position: fixed;
-            top: 2px;
-            left: 0px;
-            padding: 0;
-            margin: 4px 8px;
-            -webkit-app-region: drag;
+            /* Prevent overlap */
+            display: none;
         }
 
         & .chat__52833 {
@@ -328,9 +346,18 @@ html.platform-win {
             }
         }
 
-        & .tree__7a511 {
-            margin-top: 28px;
-            height: calc(100% - 28px);
+        & .wrapper__216eb {
+            & .scroller_de945b {
+                &::before,
+                &::after {
+                    width: 100%;
+                    content: "";
+                    display: block;
+                    min-height: 8px;
+                    -webkit-app-region: drag;
+                    pointer-events: all;
+                }
+            }
         }
 
         & .container__694a1 {
