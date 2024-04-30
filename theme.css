@@ -1,7 +1,7 @@
 /**
  * @name Fix Discord's Theme
  * @author Reabstraction
- * @version 1.0.0
+ * @version 1.0.1
  * @description (WINDOWS-ONLY) Fixes some issues I have with the Discord UI
  */
 
@@ -22,11 +22,7 @@ html.platform-win {
     }
 
     & .container_d1f8f5 {
-        -webkit-app-region: drag;
-
-        & * {
-            -webkit-app-region: no-drag;
-        }
+        /* -webkit-app-region: drag; */
     }
 
     & .titleBar__710b0 {
@@ -89,12 +85,6 @@ html.platform-win {
         transition: color .05s ease-in-out;
         color: var(--interactive-normal);
         -webkit-app-region: drag;
-
-        /* z-index: 100000; */
-        pointer-events & * {
-            -webkit-app-region: drag;
-            pointer-events: none;
-        }
     }
 
     & .standardSidebarView__12528 {
