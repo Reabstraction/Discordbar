@@ -65,7 +65,7 @@ if (argv[2] == "build-all") {
         const _result = build(e[1]);
         
         try {
-            unlinkSync(import.meta.dir + "/devel.css");
+            unlinkSync(import.meta.dir + "/out");
         } catch (e) { }
         try {
             mkdirSync(import.meta.dir + "/out");
