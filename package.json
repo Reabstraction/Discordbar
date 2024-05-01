@@ -1,0 +1,16 @@
+{
+  "name": "discord-theme",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "^1.1.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^20.12.7",
+    "postcss": "^8.4.38",
+    "postcss-minify": "^1.1.0"
+  }
+}

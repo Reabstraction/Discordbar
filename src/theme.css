@@ -17,7 +17,6 @@ html.platform-win {
      */
     --window-button-full-height: 48px;
 
-
     --elevation-low: 0;
 
     & {
@@ -38,13 +37,12 @@ html.platform-win {
         top: 0px;
         height: var(--height);
         width: 46px;
-        transition: background .1s ease-in-out, color .05s ease-in-out;
+        transition: background 0.1s ease-in-out, color 0.05s ease-in-out;
         color: var(--interactive-normal);
     }
 
     /* &.app-focused .titleBar__710b0>*, */
     & .winButton_f17fb6 {
-
         &:hover,
         &:active {
             color: var(--interactive-active);
@@ -72,7 +70,7 @@ html.platform-win {
             background: var(--red-460) !important;
             color: var(--white-100) !important;
         }
-        
+
         &:active {
             background: var(--red-400) !important;
             color: var(--white-100) !important;
@@ -83,7 +81,7 @@ html.platform-win {
         position: inherit;
         order: 0;
         margin-right: auto;
-        transition: color .05s ease-in-out;
+        transition: color 0.05s ease-in-out;
         color: var(--interactive-normal);
         -webkit-app-region: drag;
     }
@@ -125,7 +123,6 @@ html.platform-win {
     & .contentRegionScroller__9ae20 {
         display: flex;
         align-items: center;
-        flex-direction: column;
 
         & .toolsContainer__4e6ad {
             position: absolute;
@@ -142,10 +139,10 @@ html.platform-win {
     }
 
     & .blobContainer_c44493 {
-        transition: opacity .05s ease-in-out;
+        transition: opacity 0.05s ease-in-out;
 
         &:not(:is(.selected_e85eba, :hover, :active)) {
-            opacity: .8;
+            opacity: 0.8;
         }
     }
 
@@ -153,9 +150,13 @@ html.platform-win {
         border-top-left-radius: 0px;
     }
 
-    & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
-
-        & :is(.shop_b31ed2, .container_bd15da[aria-label="Friends"]) > .container__26baa {
+    &
+        body:has(:is(.chat__52833, .container__26baa)):not(
+            :has(.stop-animations)
+        ) {
+        &
+            :is(.shop_b31ed2, .container_bd15da[aria-label="Friends"])
+            > .container__26baa {
             -webkit-app-region: drag;
         }
 
@@ -175,13 +176,22 @@ html.platform-win {
             body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)) & {
                 right: calc(var(--window-button-width, 46px) * 3) !important;
             }
+
+            .chatLayerWrapper__1b344 &::after {
+                position: fixed;
+                height: 48px;
+                width: calc(var(--window-button-width, 46px) * 3);
+                background: var(--background-tertiary);
+                content: "";
+                right: 0;
+            }
         }
 
         &:has(.videoGrid__6c223) {
             & .callContainer__1477d {
                 overflow: hidden;
 
-                &>.root__3eef0 {
+                & > .root__3eef0 {
                     top: -48px;
                     background: transparent;
                 }
@@ -244,7 +254,7 @@ html.platform-win {
                 -webkit-app-region: no-drag;
             }
         }
-        
+
         & .homeWrapperNormal__34a23 > .headerBar__3337a {
             -webkit-app-region: drag;
             width: calc(100% - var(--window-button-width) * 3);
@@ -328,7 +338,7 @@ html.platform-win {
         & .chat__52833 {
             background: var(--background-tertiary);
 
-            &>.subtitleContainer_f50402 {
+            & > .subtitleContainer_f50402 {
                 margin-right: calc(var(--window-button-width, 46px) * 3);
                 -webkit-app-region: drag;
 
@@ -336,7 +346,7 @@ html.platform-win {
                     margin-right: 0;
                 }
 
-                &>.title_d4ba1a {
+                & > .title_d4ba1a {
                     background: transparent;
 
                     & .upperContainer__57565 {
@@ -344,9 +354,11 @@ html.platform-win {
                     }
 
                     & .search__07df0 {
-                        &>.search_ac353c {
-                            &>.searchBar__5a20a {
-                                background-color: var(--background-primary) !important;
+                        & > .search_ac353c {
+                            & > .searchBar__5a20a {
+                                background-color: var(
+                                    --background-primary
+                                ) !important;
                             }
                         }
                     }
@@ -360,7 +372,7 @@ html.platform-win {
 
             z-index: 0;
 
-            &>.content__01e65 {
+            & > .content__01e65 {
                 border-top: 1px solid var(--background-primary);
                 -webkit-app-region: no-drag;
 
@@ -382,15 +394,6 @@ html.platform-win {
                     pointer-events: all;
                 }
             }
-        }
-
-        & .container__694a1 {
-            & .container__26baa {
-                /* right: calc(46px * 3); */
-                width: calc(100% - (46px * 3));
-            }
-
-            /* margin-top: 48px; */
         }
     }
 }
