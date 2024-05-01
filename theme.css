@@ -70,10 +70,12 @@ html.platform-win {
 
         &:hover {
             background: var(--red-460) !important;
+            color: var(--white-100) !important;
         }
-
+        
         &:active {
             background: var(--red-400) !important;
+            color: var(--white-100) !important;
         }
     }
 
@@ -139,11 +141,23 @@ html.platform-win {
         }
     }
 
+    & .blobContainer_c44493 {
+        transition: opacity .05s ease-in-out;
+
+        &:not(:is(.selected_e85eba, :hover, :active)) {
+            opacity: .8;
+        }
+    }
+
     & .notice_a687ab {
         border-top-left-radius: 0px;
     }
 
     & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
+
+        & :is(.shop_b31ed2, .container_bd15da[aria-label="Friends"]) > .container__26baa {
+            -webkit-app-region: drag;
+        }
 
         & .header__77c95,
         & .searchBar__621ec {
