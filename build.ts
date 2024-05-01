@@ -63,7 +63,7 @@ async function build(features: string[]): Promise<postcss.Result<postcss.Root>> 
 if (argv[2] == "build-all") {
     for (const e of Object.entries(builds)) {
         const _result = build(e[1]);
-        
+
         try {
             unlinkSync(import.meta.dir + "/out");
         } catch (e) { }
@@ -89,19 +89,22 @@ if (argv[2] == "build-all") {
     }
 
     const watcher = watch(import.meta.dir, { recursive: true }, async (event, filename) => {
-        if (filename?.endsWith("devel.css")) {
-            return;
+        if (event == "change") {
+            console.log(`Update: ${filename}`);
+            if (filename?.endsWith("devel.css")) {
+                return;
+            }
+
+            try {
+                unlinkSync(import.meta.dir + "/out");
+            } catch (e) { }
+
+            const source = await build(features);
+
+            const develWriter = file(`${import.meta.dir}/devel.css`).writer();
+            develWriter.write(source.content);
+            develWriter.end();
         }
-
-        try {
-            unlinkSync(import.meta.dir + "/out");
-        } catch (e) { }
-
-        const source = await build(features);
-
-        const develWriter = file(`${import.meta.dir}/devel.css`).writer();
-        develWriter.write(source.content);
-        develWriter.end();
     });
 
     build(features);
