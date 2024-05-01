@@ -93,7 +93,15 @@ if (argv[2] == "build-all") {
             return;
         }
 
-        await build(features);
+        try {
+            unlinkSync(import.meta.dir + "/out");
+        } catch (e) { }
+
+        const source = await build(features);
+
+        const develWriter = file(`${import.meta.dir}/devel.css`).writer();
+        develWriter.write(source.content);
+        develWriter.end();
     });
 
     build(features);
