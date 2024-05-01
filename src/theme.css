@@ -122,7 +122,7 @@ html.platform-win {
 
     & .contentRegionScroller__9ae20 {
         display: flex;
-        align-items: center;
+        /* align-items: center; */
 
         & .toolsContainer__4e6ad {
             position: absolute;
