@@ -77,8 +77,8 @@ if (argv[2] == "build-all") {
         develWriter.write(result.css);
         develWriter.end();
     }
-} else if (argv[3] === "watch") {
-    const raw_features = argv[2];
+} else if (argv[2] === "watch") {
+    const raw_features = argv[3];
     let features: string[] = [];
     if (raw_features) {
         if (raw_features != ",") {
