@@ -94,6 +94,9 @@ if (argv[2] == "build-all") {
             if (filename?.endsWith("devel.css")) {
                 return;
             }
+            if (!filename?.endsWith(".css")) {
+                return;
+            }
 
             try {
                 unlinkSync(import.meta.dir + "/out");
