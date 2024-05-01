@@ -173,7 +173,7 @@ html.platform-win {
                 -webkit-app-region: drag;
             }
 
-            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)):has(.chat__52833) & {
+            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)):has(.chatContent_f087cb) & {
                 right: calc(var(--window-button-width, 46px) * 3) !important;
             }
 
