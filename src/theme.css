@@ -173,8 +173,8 @@ html.platform-win {
                 -webkit-app-region: drag;
             }
 
-            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)) & {
-                /* right: calc(var(--window-button-width, 46px) * 3) !important; */
+            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)):has(.chat__52833) & {
+                right: calc(var(--window-button-width, 46px) * 3) !important;
             }
 
             .chatLayerWrapper__1b344 &::after {
