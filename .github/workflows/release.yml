@@ -14,7 +14,7 @@ jobs:
               run: |
                 curl -fsSL https://bun.sh/install | bash
             - name: Install node deps
-              run: bun install
+              run: ~/.bin/bin/bun install
             - name: Build
               run: ~/.bin/bin/bun build.ts , build
             - uses: actions/upload-artifact@v4
