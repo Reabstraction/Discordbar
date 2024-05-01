@@ -16,7 +16,7 @@ jobs:
             - name: Install node deps
               run: ~/.bun/bin/bun install
             - name: Build
-              run: ~/.bun/bin/bun build.ts , build
+              run: ~/.bun/bin/bun build.ts build-all
             - uses: actions/upload-artifact@v4
               with:
                 name: styles
