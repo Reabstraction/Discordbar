@@ -21,8 +21,6 @@ jobs:
               with:
                 name: styles
                 path: out
-            - name: Copy for pages
-              run: cp devel.css out/general.css
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
