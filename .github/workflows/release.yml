@@ -19,5 +19,14 @@ jobs:
               run: ~/.bun/bin/bun build.ts , build
             - uses: actions/upload-artifact@v4
               with:
-                name: general.css
-                path: devel.css
+                name: styles
+                path: out
+            - name: Copy for pages
+              run: cp devel.css out/general.css
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                path: out
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4

@@ -1,20 +1,7 @@
 import postcss from "postcss";
-// @ts-ignore : No types
-import postcssMinify from "postcss-minify";
-import { watch, unlink, unlinkSync } from "fs";
+import { watch, unlinkSync, mkdirSync } from "fs";
 import { argv } from "process";
 import { file, $ } from "bun";
-
-// First param is , seperated list of features
-const raw_features = argv[2];
-let features: string[] = [];
-if (raw_features) {
-    if (raw_features != ",") {
-        raw_features.split(",").forEach(feature => {
-            features.push(feature);
-        });
-    }
-}
 
 function resolveFeature(params: string, features: string[], recurse: number = 0): boolean {
     if (recurse > 10) {
@@ -40,7 +27,7 @@ function resolveFeature(params: string, features: string[], recurse: number = 0)
     return resolveFeature(params, features, recurse + 1);
 }
 
-const featurePlugin: postcss.Plugin = {
+const featurePlugin: (features: string[]) => postcss.Plugin = (features: string[]) => ({
     postcssPlugin: "by-feature",
     AtRule(atRule, helper) {
         if (atRule.name === "feature") {
@@ -53,43 +40,64 @@ const featurePlugin: postcss.Plugin = {
             }
         }
     },
-}
+})
 
-const plugins: postcss.AcceptedPlugin[] = [
-    featurePlugin
-];
+const builds: { [name: string]: string[] } = { general: ['general'] };
 
-const post = postcss(plugins);
+async function build(features: string[]): Promise<postcss.Result<postcss.Root>> {
+    const plugins: postcss.AcceptedPlugin[] = [
+        featurePlugin(features)
+    ];
 
-async function build() {
+    const post = postcss(plugins);
+
     // read import.meta.dir + "/src/theme.css"
     const contents = await file(import.meta.dir + "/src/theme.css").text();
 
     // console.log("-".repeat(80));
-    post.process(contents, { from: undefined }).then(async result => {
-        // console.log("-".repeat(80));
-        // console.log(result.css);
+    const results = await post.process(contents, { from: undefined });
 
+    return results;
+}
+
+if (argv[2] == "build-all") {
+    for (const e of Object.entries(builds)) {
+        const _result = build(e[1]);
+        
         try {
             unlinkSync(import.meta.dir + "/devel.css");
         } catch (e) { }
-        const develWriter = file(import.meta.dir + "/devel.css").writer();
+        try {
+            mkdirSync(import.meta.dir + "/out");
+        } catch (e) { }
+
+        const result = await _result;
+
+        const develWriter = file(`${import.meta.dir}/out/${e[0]}.css`).writer();
         develWriter.write(result.css);
         develWriter.end();
-    });
-}
+    }
+} else if (argv[3] === "watch") {
+    const raw_features = argv[2];
+    let features: string[] = [];
+    if (raw_features) {
+        if (raw_features != ",") {
+            raw_features.split(",").forEach(feature => {
+                features.push(feature);
+            });
+        }
+    }
 
-if (argv[3] === "watch") {
     const watcher = watch(import.meta.dir, { recursive: true }, async (event, filename) => {
         if (filename?.endsWith("devel.css")) {
             return;
         }
-        // console.log(event)
-        await build();
+
+        await build(features);
     });
 
-    build();
+    build(features);
     await new Promise(() => { });
 } else {
-    build();
+    console.log("No option provided");
 }
