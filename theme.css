@@ -153,15 +153,6 @@ html.platform-win {
         border-top-left-radius: 0px;
     }
 
-    & .backdrop__1a911 {
-        -webkit-app-region: drag;
-        z-index: -1;
-    }
-
-    & .focusLock__28507 {
-        -webkit-app-region: no-drag;
-    }
-
     & body:has(:is(.chat__52833, .container__26baa)):not(:has(.stop-animations)) {
 
         & :is(.shop_b31ed2, .container_bd15da[aria-label="Friends"]) > .container__26baa {
