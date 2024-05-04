@@ -69,7 +69,7 @@ async function build(features: string[]): Promise<postcss.Result<postcss.Root>> 
 
     const post = postcss(plugins);
     console.log("[!] Initialized PostCSS");
-    
+
     const contents = await file(import.meta.dir + "/src/theme.css").text();
     console.log(`[!] Read file: ${import.meta.dir + "/src/theme.css"}`);
 
@@ -81,12 +81,12 @@ async function build(features: string[]): Promise<postcss.Result<postcss.Root>> 
 
 if (argv[2] == "build-all") {
     const entries = Object.entries(builds);
-    if(verbose) {
+    if (verbose) {
         console.log(`[!] Building ${entries.length} targets for ${production ? 'production' : 'development'}`);
     }
 
     for (const e of entries) {
-        if(verbose) {
+        if (verbose) {
             console.log(`[!] Building ${e[0]} with features ${e[1].join(",")}`);
         }
         const _result = build(e[1]);
@@ -101,12 +101,12 @@ if (argv[2] == "build-all") {
         const result = await _result;
         let css = result.css;
 
-        if(production) {
+        if (production) {
             css = `/* By using this theme, you agree to the following license:\n${license}*/${css}`;
         }
 
         const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, css);
-        if(verbose) {
+        if (verbose) {
             console.log(`[!] Finish build ${e[0]} to: ${import.meta.dir + "/out/" + e[0]}.css`);
         }
     }
