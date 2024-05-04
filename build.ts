@@ -68,27 +68,31 @@ async function build(features: string[]): Promise<postcss.Result<postcss.Root>> 
         }));
 
     const post = postcss(plugins);
-    console.log("[!] Initialized PostCSS");
+    if (verbose)
+        console.log("[!] Initialized PostCSS");
 
     const contents = await file(import.meta.dir + "/src/theme.css").text();
-    console.log(`[!] Read file: ${import.meta.dir + "/src/theme.css"}`);
+    if (verbose)
+        console.log(`[!] Read file: ${import.meta.dir + "/src/theme.css"}`);
 
     const results = await post.process(contents, { from: undefined, to: undefined });
-    console.log("[!] PostCSS processed");
+    if (verbose)
+        console.log("[!] PostCSS processed");
 
     return results;
 }
 
 if (argv[2] == "build-all") {
     const entries = Object.entries(builds);
-    if (verbose) {
+    if (verbose)
         console.log(`[!] Building ${entries.length} targets for ${production ? 'production' : 'development'}`);
-    }
 
     for (const e of entries) {
-        if (verbose) {
+        if (verbose)
             console.log(`[!] Building ${e[0]} with features ${e[1].join(",")}`);
-        }
+        else
+            console.log(`Building target ${e[0]}`)
+
         const _result = build(e[1]);
 
         try {
@@ -106,11 +110,11 @@ if (argv[2] == "build-all") {
         }
 
         const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, css);
-        if (verbose) {
+        if (verbose)
             console.log(`[!] Finish build ${e[0]} to: ${import.meta.dir + "/out/" + e[0]}.css`);
-        }
     }
-    console.log("[!] Finish building all");
+    if (verbose)
+        console.log("[!] Finish building all");
 } else if (argv[2] === "watch") {
     const build_name = argv[3];
     let features: string[] = [];
