@@ -1,8 +1,12 @@
 import postcss from "postcss";
 import { watch, unlinkSync, mkdirSync, writeFileSync } from "fs";
 import { argv } from "process";
-import { file, $ } from "bun";
+import { file, $, env } from "bun";
 import cssnano from "cssnano";
+
+const in_github_actions = env["GITHUB_ACTIONS"];
+const verbose = argv.includes("--verbose") || in_github_actions;
+const production = argv.includes("--production") || in_github_actions;
 
 function resolveFeature(params: string, features: string[], recurse: number = 0): boolean {
     if (recurse > 10) {
@@ -52,27 +56,39 @@ const featurePlugin: (features: string[]) => postcss.Plugin = (features: string[
 
 const builds: { [name: string]: string[] } = { general: ['general'], clutterfree: ['general', 'clutterfree'] };
 
+const license = await file(import.meta.dir + "/LICENSE").text();
+
 async function build(features: string[]): Promise<postcss.Result<postcss.Root>> {
     const plugins: postcss.AcceptedPlugin[] = [
         featurePlugin(features),
+    ];
+    if (production) plugins.push(
         cssnano({
             preset: "advanced",
-        })
-    ];
+        }));
 
     const post = postcss(plugins);
-
-    // read import.meta.dir + "/src/theme.css"
+    console.log("[!] Initialized PostCSS");
+    
     const contents = await file(import.meta.dir + "/src/theme.css").text();
+    console.log(`[!] Read file: ${import.meta.dir + "/src/theme.css"}`);
 
-    // console.log("-".repeat(80));
     const results = await post.process(contents, { from: undefined, to: undefined });
+    console.log("[!] PostCSS processed");
 
     return results;
 }
 
 if (argv[2] == "build-all") {
-    for (const e of Object.entries(builds)) {
+    const entries = Object.entries(builds);
+    if(verbose) {
+        console.log(`[!] Building ${entries.length} targets for ${production ? 'production' : 'development'}`);
+    }
+
+    for (const e of entries) {
+        if(verbose) {
+            console.log(`[!] Building ${e[0]} with features ${e[1].join(",")}`);
+        }
         const _result = build(e[1]);
 
         try {
@@ -83,8 +99,16 @@ if (argv[2] == "build-all") {
         } catch (e) { }
 
         const result = await _result;
+        let css = result.css;
 
-        const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, result.css);
+        if(production) {
+            css = `/*\n${license}*/${css}`;
+        }
+
+        const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, css);
+        if(verbose) {
+            console.log(`[!] Finish build ${e[0]} to: ${import.meta.dir + "/out/" + e[0]}.css`);
+        }
     }
 } else if (argv[2] === "watch") {
     const build_name = argv[3];
