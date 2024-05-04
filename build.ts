@@ -90,22 +90,29 @@ if (argv[2] == "build-all") {
 
     const watcher = watch(import.meta.dir, { recursive: true }, async (event, filename) => {
         if (event == "change") {
-            if (filename?.endsWith("devel.css")) {
-                return;
+            if (filename) {
+                if (filename.endsWith("devel.css")) {
+                    return;
+                }
+
+                if (filename.startsWith(".git") || filename.startsWith("node_modules")) {
+                    return;
+                }
+
+                if (!filename.endsWith(".css")) {
+                    console.log(`Ignore: ${filename}`);
+                    return;
+                }
+                console.log(`Update: ${filename}`);
+
+                try {
+                    unlinkSync(import.meta.dir + "/out");
+                } catch (e) { }
+
+                const source = await build(features);
+
+                writeFileSync(`${import.meta.dir}/devel.css`, source.content);
             }
-            if (!filename?.endsWith(".css")) {
-                console.log(`Ignore: ${filename}`);
-                return;
-            }
-            console.log(`Update: ${filename}`);
-
-            try {
-                unlinkSync(import.meta.dir + "/out");
-            } catch (e) { }
-
-            const source = await build(features);
-
-            writeFileSync(`${import.meta.dir}/devel.css`, source.content);
         }
     });
 
