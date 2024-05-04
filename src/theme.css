@@ -212,6 +212,10 @@ html.platform-win {
                     width: calc(100% - var(--window-button-width, 46px) * 3);
                 }
                 -webkit-app-region: drag;
+                & .toolbar__62fb5 > :not(.divider_bdb894) {
+                    -webkit-app-region: no-drag;
+                    /* background: red; */
+                }
             }
             
             & .container__694a1 > .container__26baa {
@@ -224,6 +228,11 @@ html.platform-win {
                     margin-left: 0;
                     width: calc(100% - var(--window-button-width, 46px) * 3);
                 }
+            }
+            
+            & .container__26baa {
+                margin-left: 0 !important;
+                /* width: calc(100% - var(--window-button-width, 46px) * 3); */
             }
 
             & .callContainer__1477d {
@@ -260,7 +269,7 @@ html.platform-win {
                 padding: 0;
                 width: 100%;
                 /* background: var(--background-tertiary); */
-                width: calc(100% - var(--window-button-width, 46px) * 3 + 20px);
+                width: calc(100% - var(--window-button-width, 46px) * 3);
                 display: block;
                 transform: none;
                 opacity: 1;
