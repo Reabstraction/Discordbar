@@ -42,7 +42,7 @@ const featurePlugin: (features: string[]) => postcss.Plugin = (features: string[
     },
 })
 
-const builds: { [name: string]: string[] } = { general: ['general'] };
+const builds: { [name: string]: string[] } = { general: ['general'], clutterfree: ['general', 'clutterfree'] };
 
 async function build(features: string[]): Promise<postcss.Result<postcss.Root>> {
     const plugins: postcss.AcceptedPlugin[] = [
@@ -78,14 +78,15 @@ if (argv[2] == "build-all") {
         develWriter.end();
     }
 } else if (argv[2] === "watch") {
-    const raw_features = argv[3];
+    const build_name = argv[3];
     let features: string[] = [];
-    if (raw_features) {
-        if (raw_features != ",") {
-            raw_features.split(",").forEach(feature => {
-                features.push(feature);
-            });
-        }
+    if (Object.keys(builds).includes(build_name)) {
+        features = builds[build_name];
+    } else {
+        // , seperated list, also warn
+        features = build_name.split(",");
+
+        console.log(`Unknown build: ${build_name}`);
     }
 
     const watcher = watch(import.meta.dir, { recursive: true }, async (event, filename) => {
