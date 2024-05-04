@@ -173,7 +173,10 @@ html.platform-win {
                 -webkit-app-region: drag;
             }
 
-            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)):has(.chatContent_f087cb) & {
+            body:has(.callContainer__1477d):not(:has(.videoGrid__6c223)):has(
+                    .chatContent_f087cb
+                )
+                & {
                 right: calc(var(--window-button-width, 46px) * 3) !important;
             }
 
@@ -188,8 +191,25 @@ html.platform-win {
         }
 
         &:has(.videoControls_af6621):has(.typeWindows_e41dab) {
-            & .videoControls_af6621 > .topControls_e834ab .upperContainer__57565 {
+            &
+                .videoControls_af6621
+                > .topControls_e834ab
+                .upperContainer__57565 {
                 margin-right: 0;
+            }
+            
+            & .videoControls_af6621 {
+                padding: 0 !important;
+                & > .bottomControls__72d8d {
+                    padding: 16px;
+                    width: calc(100% - 16px * 2);
+                }
+            }
+
+            & .container__26baa:has(> .upperContainer__57565) {
+                margin-left: calc(var(--window-button-width, 46px) * 3);
+                width: calc(100% - var(--window-button-width, 46px) * 3);
+                -webkit-app-region: drag;
             }
 
             & .callContainer__1477d {
@@ -225,7 +245,7 @@ html.platform-win {
                 margin: 0;
                 padding: 0;
                 width: 100%;
-                background: var(--background-tertiary);
+                /* background: var(--background-tertiary); */
                 width: calc(100% - var(--window-button-width, 46px) * 3 + 20px);
                 display: block;
                 transform: none;
@@ -263,6 +283,10 @@ html.platform-win {
                 background: var(--background-primary);
                 -webkit-app-region: no-drag;
             }
+        }
+
+        & .headerWrapper_ea51a0 {
+            margin: 0;
         }
 
         & .homeWrapperNormal__34a23 > .headerBar__3337a {
@@ -303,7 +327,7 @@ html.platform-win {
         }
 
         &:has(.typeWindows_e41dab) .upperContainer__57565 {
-            margin-right: calc(var(--window-button-width) * 3);
+            margin-right: calc(var(--window-button-width, 46px) * 3);
         }
 
         & .base_c0676e {
@@ -311,7 +335,7 @@ html.platform-win {
         }
 
         &:has(.typeWindows_e41dab) .notice__5fd4c {
-            margin-right: calc(var(--window-button-width) * 3);
+            margin-right: calc(var(--window-button-width, 46px) * 3);
         }
 
         & .winButton_f17fb6 {
@@ -362,21 +386,19 @@ html.platform-win {
                     & .upperContainer__57565 {
                         margin-right: 0;
                     }
-
-                    & .search__07df0 {
-                        & > .search_ac353c {
-                            & > .searchBar__5a20a {
-                                background-color: var(
-                                    --background-primary
-                                ) !important;
-                            }
-                        }
-                    }
                 }
 
                 & .iconWrapper_de6cd1 *,
                 & .iconWrapper_de6cd1 {
                     -webkit-app-region: no-drag;
+                }
+            }
+
+            & .search__07df0 {
+                & > .search_ac353c {
+                    & > .searchBar__5a20a {
+                        background-color: var(--background-primary) !important;
+                    }
                 }
             }
 
@@ -406,8 +428,10 @@ html.platform-win {
             }
         }
 
-        & :not(:is(.homeWrapperNormal__34a23, .subtitleContainer_f50402)) > .container__26baa {
-            width: calc(100% - var(--window-button-width, 46px) * 3);
+        &
+            :not(:is(.homeWrapperNormal__34a23, .subtitleContainer_f50402))
+            > .container__26baa {
+            /* width: calc(100% - var(--window-button-width, 46px) * 3); */
             & > .upperContainer__57565 {
                 margin-right: 0;
             }
@@ -422,10 +446,13 @@ html.platform-win {
             }
         }
     }
-    
 
     @feature clutterfree {
-        .iconWrapper_de6cd1.clickable_ce0925:is([aria-label="Help"], [aria-label="Notification Settings"], [aria-label="Inbox"]) {
+        .iconWrapper_de6cd1.clickable_ce0925:is(
+                [aria-label="Help"],
+                [aria-label="Notification Settings"],
+                [aria-label="Inbox"]
+            ) {
             display: none;
         }
 
