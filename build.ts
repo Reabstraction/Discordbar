@@ -102,7 +102,7 @@ if (argv[2] == "build-all") {
         let css = result.css;
 
         if(production) {
-            css = `/*\n${license}*/${css}`;
+            css = `/* By using this theme, you agree to the following license:\n${license}*/${css}`;
         }
 
         const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, css);
