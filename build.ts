@@ -2,6 +2,7 @@ import postcss from "postcss";
 import { watch, unlinkSync, mkdirSync, writeFileSync } from "fs";
 import { argv } from "process";
 import { file, $ } from "bun";
+import cssnano from "cssnano";
 
 function resolveFeature(params: string, features: string[], recurse: number = 0): boolean {
     if (recurse > 10) {
@@ -27,26 +28,36 @@ function resolveFeature(params: string, features: string[], recurse: number = 0)
     return resolveFeature(params, features, recurse + 1);
 }
 
-const featurePlugin: (features: string[]) => postcss.Plugin = (features: string[]) => ({
-    postcssPlugin: "by-feature",
-    AtRule(atRule, helper) {
-        if (atRule.name === "feature") {
-            if (resolveFeature(atRule.params, features)) {
-                atRule.nodes?.forEach(node => {
-                    atRule.after(node);
-                });
-            } else {
-                atRule.removeAll();
+
+const featurePlugin: (features: string[]) => postcss.Plugin = (features: string[]) => {
+    return {
+        postcssPlugin: "by-feature",
+        async AtRuleExit(atRule, helper) {
+            // console.log(`atRule: ${atRule}`);
+            if (atRule.name === "feature") {
+                if (resolveFeature(atRule.params, features)) {
+                    atRule.nodes?.forEach(node => {
+                        atRule.after(node);
+                    });
+                    atRule.removeAll();
+                    atRule.remove();
+                } else {
+                    atRule.removeAll();
+                    atRule.remove();
+                }
             }
-        }
-    },
-})
+        },
+    }
+};
 
 const builds: { [name: string]: string[] } = { general: ['general'], clutterfree: ['general', 'clutterfree'] };
 
 async function build(features: string[]): Promise<postcss.Result<postcss.Root>> {
     const plugins: postcss.AcceptedPlugin[] = [
-        featurePlugin(features)
+        featurePlugin(features),
+        cssnano({
+            preset: "advanced",
+        })
     ];
 
     const post = postcss(plugins);
@@ -55,7 +66,7 @@ async function build(features: string[]): Promise<postcss.Result<postcss.Root>> 
     const contents = await file(import.meta.dir + "/src/theme.css").text();
 
     // console.log("-".repeat(80));
-    const results = await post.process(contents, { from: undefined });
+    const results = await post.process(contents, { from: undefined, to: undefined });
 
     return results;
 }
@@ -73,9 +84,7 @@ if (argv[2] == "build-all") {
 
         const result = await _result;
 
-        const develWriter = file(`${import.meta.dir}/out/${e[0]}.css`).writer();
-        develWriter.write(result.css);
-        develWriter.end();
+        const develWriter = writeFileSync(`${import.meta.dir}/out/${e[0]}.css`, result.css);
     }
 } else if (argv[2] === "watch") {
     const build_name = argv[3];
