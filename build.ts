@@ -110,6 +110,7 @@ if (argv[2] == "build-all") {
             console.log(`[!] Finish build ${e[0]} to: ${import.meta.dir + "/out/" + e[0]}.css`);
         }
     }
+    console.log("[!] Finish building all");
 } else if (argv[2] === "watch") {
     const build_name = argv[3];
     let features: string[] = [];
