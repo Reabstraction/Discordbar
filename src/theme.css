@@ -405,5 +405,21 @@ html.platform-win {
                 }
             }
         }
+
+        & :not(:is(.homeWrapperNormal__34a23, .subtitleContainer_f50402)) > .container__26baa {
+            width: calc(100% - var(--window-button-width, 46px) * 3);
+            & > .upperContainer__57565 {
+                margin-right: 0;
+            }
+
+            &::after {
+                height: 48px;
+                width: calc(var(--window-button-width, 46px) * 3);
+                background: var(--background-tertiary);
+                content: "";
+                position: fixed;
+                right: 0;
+            }
+        }
     }
 }
