@@ -206,10 +206,24 @@ html.platform-win {
                 }
             }
 
-            & .container__26baa:has(> .upperContainer__57565) {
+            & :not(.container__694a1) > .container__26baa:has(> .upperContainer__57565) {
                 margin-left: calc(var(--window-button-width, 46px) * 3);
+                body:has(.privateChannels__9b518) & {
+                    width: calc(100% - var(--window-button-width, 46px) * 3);
+                }
+                -webkit-app-region: drag;
+            }
+            
+            & .container__694a1 > .container__26baa {
                 width: calc(100% - var(--window-button-width, 46px) * 3);
                 -webkit-app-region: drag;
+            }
+
+            &:has(.container__694a1) {
+                & .subtitleContainer__63ebe > .container__26baa {
+                    margin-left: 0;
+                    width: calc(100% - var(--window-button-width, 46px) * 3);
+                }
             }
 
             & .callContainer__1477d {
