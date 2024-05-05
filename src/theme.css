@@ -412,6 +412,10 @@ html.platform-win {
                 & .iconWrapper_de6cd1 {
                     -webkit-app-region: no-drag;
                 }
+                
+                & > .container__26baa {
+                    width: 100% !important;
+                }
             }
 
             & .search__07df0 {
