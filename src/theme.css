@@ -472,7 +472,7 @@ html.platform-win {
     }
 
     @feature clutterfree {
-        .iconWrapper_de6cd1.clickable_ce0925:is(
+        & .iconWrapper_de6cd1.clickable_ce0925:is(
                 [aria-label="Help"],
                 [aria-label="Notification Settings"],
                 [aria-label="Inbox"]
@@ -480,7 +480,7 @@ html.platform-win {
             display: none;
         }
 
-        [data-list-item-id="channels___boosts-603970300668805120"] {
+        & [data-list-item-id="channels___boosts-603970300668805120"] {
             display: none;
         }
     }
